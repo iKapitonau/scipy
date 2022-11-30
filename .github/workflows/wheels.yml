@@ -241,24 +241,24 @@ jobs:
           path: ./wheelhouse/*.whl
           name: ${{ matrix.python[0] }}-${{ matrix.buildplat[1] }}
 
-      - name: Upload wheels
-        if: success()
-        shell: bash
-        env:
-          SCIPY_STAGING_UPLOAD_TOKEN: ${{ secrets.SCIPY_STAGING_UPLOAD_TOKEN }}
-          SCIPY_NIGHTLY_UPLOAD_TOKEN: ${{ secrets.SCIPY_NIGHTLY_UPLOAD_TOKEN }}
-        run: |
-          source tools/wheels/upload_wheels.sh
-          set_upload_vars
-          # For cron jobs (restricted to main branch) or "Run workflow" trigger
-          # an upload to:
-          #
-          # https://anaconda.org/scipy-wheels-nightly/scipy
-          # 
-          # Pushes to a maintenance branch that contain '[wheel build]' will
-          # cause wheels to be built and uploaded to:
-          #
-          # https://anaconda.org/multibuild-wheels-staging/scipy
-          #
-          # The tokens were originally generated at anaconda.org
-          upload_wheels
+#      - name: Upload wheels
+#        if: success()
+#        shell: bash
+#        env:
+#          SCIPY_STAGING_UPLOAD_TOKEN: ${{ secrets.SCIPY_STAGING_UPLOAD_TOKEN }}
+#          SCIPY_NIGHTLY_UPLOAD_TOKEN: ${{ secrets.SCIPY_NIGHTLY_UPLOAD_TOKEN }}
+#        run: |
+#          source tools/wheels/upload_wheels.sh
+#          set_upload_vars
+#          # For cron jobs (restricted to main branch) or "Run workflow" trigger
+#          # an upload to:
+#          #
+#          # https://anaconda.org/scipy-wheels-nightly/scipy
+#          # 
+#          # Pushes to a maintenance branch that contain '[wheel build]' will
+#          # cause wheels to be built and uploaded to:
+#          #
+#          # https://anaconda.org/multibuild-wheels-staging/scipy
+#          #
+#          # The tokens were originally generated at anaconda.org
+#          upload_wheels
