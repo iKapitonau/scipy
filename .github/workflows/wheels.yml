@@ -97,7 +97,7 @@ jobs:
         # The actions/setup-python can only use the form ["3.8"].
         exclude:
           - buildplat: [macos-12, macosx, arm64]
-            python: ["cp39", "3.9"]
+            python: ["cp38", "3.8"]
           - buildplat: [macos-12, macosx, arm64]
             python: ["cp311", "3.11.0-alpha - 3.11.0"]
     env:
@@ -116,7 +116,7 @@ jobs:
 
       - uses: actions/setup-python@v4.2.0
         with:
-          python-version: 3.8
+          python-version: 3.9
 
       - name: win_amd64 - install rtools
         run: |
@@ -157,7 +157,7 @@ jobs:
       - name: Build cp38-macosx_arm64
         # This is solely used to build cp38-macosx_arm64. As soon as 3.8 is
         # dropped then this entry can be removed
-        if: ${{ matrix.python[1] == '3.8' && matrix.buildplat[1] == 'macosx' && matrix.buildplat[2] == 'arm64' }}
+        if: ${{ matrix.python[1] == '3.9' && matrix.buildplat[1] == 'macosx' && matrix.buildplat[2] == 'arm64' }}
         run: |
           # Update license
           cat tools/wheels/LICENSE_osx.txt >> LICENSE.txt
@@ -202,8 +202,8 @@ jobs:
 
           export PKG_CONFIG_PATH=/opt/arm64-builds/lib/pkgconfig
           export PKG_CONFIG=/usr/local/bin/pkg-config
-          export CFLAGS=" -arch arm64 -std=c11 $CFLAGS"
-          export CXXFLAGS=" -arch arm64 -std=c++11 $CXXFLAGS"
+          export CFLAGS=" -arch arm64 $CFLAGS"
+          export CXXFLAGS=" -arch arm64 $CXXFLAGS"
           export LD_LIBRARY_PATH="/opt/arm64-builds/lib:$FC_LIBDIR:$LD_LIBRARY_PATH"
           
           # install dependencies for the build machine
