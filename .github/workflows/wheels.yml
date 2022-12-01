@@ -202,8 +202,8 @@ jobs:
 
           export PKG_CONFIG_PATH=/opt/arm64-builds/lib/pkgconfig
           export PKG_CONFIG=/usr/local/bin/pkg-config
-          export CFLAGS=" -arch arm64 $CFLAGS"
-          export CXXFLAGS=" -arch arm64 $CXXFLAGS"
+          export CFLAGS=" -arch arm64 -std=c11 $CFLAGS"
+          export CXXFLAGS=" -arch arm64 -std=c++11 $CXXFLAGS"
           export LD_LIBRARY_PATH="/opt/arm64-builds/lib:$FC_LIBDIR:$LD_LIBRARY_PATH"
           
           # install dependencies for the build machine
